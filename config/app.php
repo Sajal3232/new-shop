@@ -163,6 +163,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+       
 
         /*
          * Package Service Providers...
@@ -231,6 +233,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Cart' => Melihovv\ShoppingCart\Facades\ShoppingCart::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
 
 

@@ -207,9 +207,10 @@ Route::post('/product/update',[
 
 
 ////admin manage order
-Route::get('/order/manage',[
+Route::get('/order/manage-order',[
     'uses'=>"App\Http\Controllers\OrderController@manageOrderInfo",
-    'as'=>'manage-order'
+    'as'=>'manage-order',
+    'middleware'=>'Log'
 ]);
 
 Route::get('/order/view-order-detail/{id}',[
@@ -220,6 +221,10 @@ Route::get('/order/view-order-detail/{id}',[
 Route::get('/order/view-order-invoice/{id}',[
     'uses'=>"App\Http\Controllers\OrderController@vieworderinvoice",
     'as'=>'view-order-invoice'
+]);
+Route::get('/order/download-order-invoice/{id}',[
+    'uses'=>"App\Http\Controllers\OrderController@downloadorderinvoice",
+    'as'=>'download-order-invoice'
 ]);
 
 
