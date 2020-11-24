@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script  src="https://code.jquery.com/jquery-3.5.1.js"  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="  crossorigin="anonymous"></script>
+    <title>test api</title>
+    <script>
+        var baseUrl = "http://localhost:8012/NEW-SHOP/public/";
+        function loadStudents(){
+            $.ajax({  url: baseUrl + "students",
+                success: function(students) {
+                $("table#students").html("<tr><th>Name</th><th>Course</th></tr>");
+                 for(var i=0; i< students.length; i++){
+                    $("table#students").append("<tr><td>" + students[i].name+ "</td><td>" + students[i].course + "</td></tr>");
+                 }},
+                 error: function(er){
+                     alert('Error occured');
+                 }
+                });
+        }
+        function addStudent(s_name, c_name){
+            $.ajax({  url: baseUrl + "students", method: 'POST', data: {"name": s_name, "course": c_name},
+                success: function(student) {
+                    loadStudents();
+                 },
+                 error: function(er){
+                     alert('Error occured');
+                 }
+                });
+        }
+        $(document).ready(function(){
+            loadStudents();
+            $("#btnAdd").click(function(){
+                addStudent($("input#name").val(),$("input#course").val());
+            })
+        })
+    </script>
+</head>
+<body>
+    <div>
+        Name: <input type="text" name="name" id="name" /> <br/>
+        Course: <input type="text" name="course" id="course" /><br/>
+        <input type="button" id="btnAdd" value="Add Student" />
+    </div>
+    <table id="students">
+    </table>
+</body>
+</html>

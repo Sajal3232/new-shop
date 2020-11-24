@@ -10,7 +10,8 @@ class CartController extends Controller
 {
     private $user_id = 'sajol32';
     public function addtocart(Request $request){
-        $Products= Product::find($request->id);
+          
+        $Products= Product::find($request->id); 
 
        // return $request->all();
         // return $Products;
@@ -60,7 +61,7 @@ class CartController extends Controller
            
         Cart::restore($this->user_id);
         $cartItem = Cart::get($request->uniqueId);
-       
+        
         if($cartItem) {
             $qty =  intval($request->qty) - $cartItem->quantity;
             Cart::add($cartItem->id,$cartItem->name,$cartItem->price, $qty,[

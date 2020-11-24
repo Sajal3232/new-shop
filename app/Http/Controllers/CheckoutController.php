@@ -22,6 +22,8 @@ class CheckoutController extends Controller
         return view('front-end.checkout.checkout-content');
     }
 
+
+
     public function customersignup(Request $request){
         $this->validate($request,[
             'email'=>'email|unique:customers,email'
@@ -39,7 +41,7 @@ class CheckoutController extends Controller
        Session()->put('customerId',$customerId);
        Session()->put('customername',$customer->first_name.' '.$customer->last_name);
        $data= $customer->toArray();
-      Mail::send('front-end.mails.confirmation-mails', $data, function($message) use($data){
+       Mail::send('front-end.mails.confirmation-mails', $data, function($message) use($data){
           $message->to($data['email']);
           $message->subject('confirmation mail');
       });
@@ -95,7 +97,8 @@ class CheckoutController extends Controller
                 $payment->save();
 
                 Cart::restore($this->user_id);
-                $cartproducts = Cart::content();            
+                $cartproducts = Cart::content(); 
+                
                 //  echo 'Order Items<br/>';
                 //  print_r($cartproducts);
                 //  die();
@@ -129,7 +132,8 @@ class CheckoutController extends Controller
 
     public function customerlogincheck(Request $request){
     $customer=Customer::where('email',$request->email_login)->first();
-    
+  
+   
     if (password_verify($request->password_login, $customer->password)) {
 
         Session()->put('customerId',$customer->id);
@@ -159,8 +163,8 @@ class CheckoutController extends Controller
     /////new-customer-login-front
     public function newcustomerloginfront(Request $request){
         $customer=Customer::where('email',$request->email_login)->first();
-             
-
+       
+                 
         if($customer && $request->email_login==$customer->email){
 
 
@@ -169,7 +173,7 @@ class CheckoutController extends Controller
                 Session()->put('customerId',$customer->id);
                 Session()->put('customername',$customer->first_name.' '.$customer->last_name);
         
-                return redirect('/checkout/new-customer-login')->with('message','successfully login');
+                return redirect('/');
         
             } else {
                 return redirect('/checkout/new-customer-login')->with('message','please enter your correct password');
@@ -182,4 +186,30 @@ class CheckoutController extends Controller
         
 
     }
+
+
+    public function newcustomerregistrationfront(Request $request){
+        $this->validate($request,[
+            'email'=>'email|unique:customers,email'
+        ]);
+       $customer= new customer();
+       $customer->first_name=$request->first_name;
+       $customer->last_name=$request->last_name;
+       $customer->email=$request->email;
+       $customer->password=bcrypt($request->password);
+       $customer->phone=$request->phone;
+       $customer->address=$request->address;
+       $customer->save();
+
+       $customerId=$customer->id;
+       Session()->put('customerId',$customerId);
+       Session()->put('customername',$customer->first_name.' '.$customer->last_name);
+       $data= $customer->toArray();
+       Mail::send('front-end.mails.confirmation-mails', $data, function($message) use($data){
+          $message->to($data['email']);
+          $message->subject('confirmation mail');
+      });
+
+      return redirect('/');
+  }
 }

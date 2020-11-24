@@ -15,7 +15,7 @@
 						<li><a href="{{route('new-customer-login')}}">Login</a></li>
 						@endif
 
-						<li><a href="registered.html"> Create Account </a></li>
+						<li><a href="{{route('new-customer-login')}}"> Create Account </a></li>
 					</ul>
 					</div>
 					<div class="clearfix"></div>

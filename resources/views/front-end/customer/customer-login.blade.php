@@ -4,7 +4,7 @@
     <h3>{{Session::get('messagereg')}}</h3>
 	<div class="col-lg-6 well">
 		<h3 class='text-center text-warning py-5'>Register Here</h3>
-		{{Form::open(['method'=>'post'])}}
+		{{Form::open(['route'=>'new-customer-registration-front','method'=>'post'])}}
 		<div class="form-group">
 			<input type="text" name="first_name" class="form-control w-25" placeholder="First Name">
 		</div>
@@ -31,7 +31,7 @@
 
 
 	<div class="col-lg-5 well" style="margin:109px 47px">
-        <h3 class='text-center text-warning py-5'>Login Here</h3>
+		<h3 class='text-center text-warning py-5'>Login Here</h3>
         <h4 class="text danger text center">{{Session::get('message')}}</h4>
 		{{Form::open(['route'=>'new-customer-login-front','method'=>'post'])}}
 

@@ -32,6 +32,8 @@
 								@php ($i=1)
 								@php ($sum=0)
 								@foreach($cartproducts as $cartproduct)
+
+								
 								
 								<tr>
 									<td>{{$i++}}</td>

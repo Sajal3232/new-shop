@@ -76,7 +76,6 @@ class Productcontroller extends Controller
                     ->select('products.*','categories.category_name','brands.brand_name')
                     ->get();
 
-
         return view('admin.product.manage-product',['products'=>$products]);
     }
 
@@ -117,6 +116,7 @@ class Productcontroller extends Controller
         unlink($products->product_image);
 
         $imageurl=$this->productImageUpload($request);
+        
        $this->productbasicupdateinfo($products,$request,$imageurl);
         
     }else{
@@ -125,5 +125,10 @@ class Productcontroller extends Controller
     }
     return redirect('/product/manage')->with('message', 'product update successfully');
 
+ }
+ public function deleteproduct($id){
+    $product=Product::find($id);
+    $product->delete();
+    return redirect('/product/manage')->with('message', 'product delete successfully');
  }
 }

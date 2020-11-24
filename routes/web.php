@@ -32,8 +32,12 @@ Route::get('/',[
     'as' => '/'
 ]);
 Route::get('/catagory-product/{id}',[
-    'uses' => 'App\Http\Controllers\NewShopController@categoryProduct',
+    'uses' => 'App\Http\Controllers\NewShopController@categoryproduct',
     'as' => 'category-product'
+]);
+Route::get('/api/catagory-product/{id}',[
+    'uses' => 'App\Http\Controllers\NewShopController@productsbycategory',
+    'as' => 'api-category-product'
 ]);
 Route::get('/product-details/{id}/{name}',[
     'uses' => 'App\Http\Controllers\NewShopController@productdetails',
@@ -45,6 +49,9 @@ Route::post('/cart/add',[
     'uses' => 'App\Http\Controllers\CartController@addtocart',
     'as' => 'add-to-cart'
 ]);
+
+
+
 Route::get('/cart/show',[
     'uses' => 'App\Http\Controllers\CartController@showcart',
     'as' => 'show-cart'
@@ -70,6 +77,11 @@ Route::get('/cart/checkout',[
 Route::post('/customer/registration',[
     'uses' => 'App\Http\Controllers\CheckoutController@customersignup',
     'as' => 'customer-sign-up'
+]);
+
+Route::post('/api/customer/registration',[
+    'uses' => 'App\Http\Controllers\ApiController@customersignup',
+    'as' => 'api-customer-sign-up'
 ]);
 
 Route::get('/checkout/shipping',[
@@ -118,6 +130,12 @@ Route::get('/checkout/new-customer-login',[
 Route::post('/checkout/new-customer-login-front',[
     'uses' => 'App\Http\Controllers\CheckoutController@newcustomerloginfront',
     'as' => 'new-customer-login-front'
+]);
+
+
+Route::post('/checkout/new-customer-registration-front',[
+    'uses' => 'App\Http\Controllers\CheckoutController@newcustomerregistrationfront',
+    'as' => 'new-customer-registration-front'
 ]);
 
 
@@ -171,37 +189,41 @@ Route::get('/category/delete/{id}',[
 ]);
 // brand==========
 Route::get('/brand/add',[
-    'uses'=>"App\Http\Controllers\brandController@index",
+    'uses'=>"App\Http\Controllers\BrandController@index",
     'as'=>'brand/add'
 ]);
 Route::post('/brand/save',[
-    'uses'=>"App\Http\Controllers\brandController@savebrand",
+    'uses'=>"App\Http\Controllers\BrandController@savebrand",
     'as'=>'new-brand'
 ]);
 Route::get('/brand/product',[
-    'uses'=>"App\Http\Controllers\brandController@brandsproduct",
+    'uses'=>"App\Http\Controllers\BrandController@brandsproduct",
     'as'=>'brands-product'
 ]);
 //product
 Route::get('/product/add',[
-    'uses'=>"App\Http\Controllers\productController@index",
+    'uses'=>"App\Http\Controllers\ProductController@index",
     'as'=>'product/add'
 ]);
 Route::post('/product/save',[
-    'uses'=>"App\Http\Controllers\productController@saveproduct",
+    'uses'=>"App\Http\Controllers\ProductController@saveproduct",
     'as'=>'product/new'
 ]);
 Route::get('/product/manage',[
-    'uses'=>"App\Http\Controllers\productController@manageproduct",
+    'uses'=>"App\Http\Controllers\ProductController@manageproduct",
     'as'=>'product/manage'
 ]);
 Route::get('/product/edit/{id}',[
-    'uses'=>"App\Http\Controllers\productController@editproduct",
+    'uses'=>"App\Http\Controllers\ProductController@editproduct",
     'as'=>'product/edit'
+]);
+Route::get('/product/delete/{id}',[
+    'uses'=>"App\Http\Controllers\ProductController@deleteproduct",
+    'as'=>'product/delete'
 ]);
 
 Route::post('/product/update',[
-    'uses'=>"App\Http\Controllers\productController@updateproduct",
+    'uses'=>"App\Http\Controllers\ProductController@updateproduct",
     'as'=>'product/update'
 ]);
 
@@ -227,6 +249,9 @@ Route::get('/order/download-order-invoice/{id}',[
     'as'=>'download-order-invoice'
 ]);
 
+Route::get('students', ['uses' => 'App\Http\Controllers\ApiController@index', 'as' => 'students']);
+Route::get('students/{id}', ['uses' => 'App\Http\Controllers\ApiController@show', 'as' => 'students']);
+Route::post('students', ['uses' => 'App\Http\Controllers\ApiController@create', 'as' => 'students']);
 
 
 

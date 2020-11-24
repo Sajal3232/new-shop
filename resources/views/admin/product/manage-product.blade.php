@@ -48,7 +48,7 @@
                     <a href="{{route('product/edit',['id'=>$product->id])}}" class="btn btn-success btn-sm" title="edit">
                     <i class="fas fa-edit    "></i>
                     </a>
-                    <a href="" class="btn btn-danger btn-sm" title="delete">
+                    <a href="{{route('product/delete',['id'=>$product->id])}}" class="btn btn-danger btn-sm" title="delete">
                         <i class="fas fa-trash    "></i>
                     </a>
                         </td>

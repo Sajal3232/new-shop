@@ -31,7 +31,14 @@ class NewShopController extends Controller
         ]);
 
     }
-
+    public function productsbycategory($id){
+        $categoriesproducts= Product::where('category_id', $id)
+                 ->where('publication_status',1)
+                 ->get();
+         return $categoriesproducts;
+ 
+     }
+    
     public function productdetails($id){
         $product=Product::find($id);
         return view('front-end.product.product-details',['product'=>$product]);
